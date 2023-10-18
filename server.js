@@ -3,36 +3,37 @@ const app = express()
 const PORT = 8000
 
 const rappers = {
-    '21 savage': {
+
+    'savage': {
         'age': 29,
-        'birthName': 'Sheyaa Bn Abram',
-        'birthLocation': 'London, England'
+        'birthName': 'Sheyaa Bin',
+        'birthLocation': "London, England",
     },
-    'chance the rapper': {
+    'chance': {
         'age': 29,
-        'birthName': 'Chancelor Bennett',
-        'birthLocation': 'Chicago, Illinois'
+        'birthName': 'Chancellor',
+        'birthLocation': "chicago",
     },
-    'dylan': {
-        'age': 29,
-        'birthName': 'Dylan',
-        'birthLocation': 'Dylan'
-    }
+    'unknown': {
+        'age': 'unknown',
+        'birthName': 'unknown',
+        'birthLocation': "unknown"
+    },
 }
-
-
-app.get('/', (request, response)=>{ 
+app.get('/', (request, response) => {
     response.sendFile(__dirname + '/index.html')
+     
 })
 
-app.get('/api/:rapperName', (request, response) => {
-    const rappersName = request.params.rapperName.toLowerCase()
-    if(rappers[rappersName]) {
-        response.json(rappers[rappersName])
+app.get('/api/:name', (request, response) => {
+    const rapperName = request.params.name.toLowerCase()
+    if (rappers[rapperName]) {
+        response.json(rappers[rapperName])
     } else {
-        response.json(rappers['dylan'])
+        response.json(rappers['unknown'])
     }
 })
-app.listen(process.env.PORT || PORT, ()=> {
-    console.log(`The server is running on port ${PORT}, you better go catch it!`)
+
+app.listen(PORT, () => {
+    console.log(`this server is running on port ${PORT}, you better go catch it.`)
 })
